@@ -555,7 +555,7 @@ export default function App() {
                   <img 
                     src="/images/foto-about-me.jpg" 
                     alt="Profile" 
-                    className="w-full h-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-105" 
+                    className="w-full h-full object-cover object-top grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-105" 
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-60" />
                 </div>
@@ -568,16 +568,17 @@ export default function App() {
                 transition={{ duration: 0.6, delay: 0.2 }}
                 className="w-full md:w-1/2"
               >
-                <h3 className="text-4xl font-bold mb-8">Design that thinks, Code that feels.</h3>
+                <h3 className="text-4xl font-bold mb-8">About me</h3>
+                <p className="text-lg text-slate-400 leading-relaxed mb-4">
+                  Halo! Saya seorang siswa SMK jurusan Rekayasa Perangkat Lunak yang memiliki ketertarikan besar di dunia pengembangan web dan mobile app. Saya senang membangun aplikasi yang tidak hanya berfungsi dengan baik, tetapi juga nyaman digunakan. Fokus saya saat ini adalah mempelajari dan mengembangkan project menggunakan Laravel, Flutter, dan teknologi modern lainnya.
+                </p>
                 <p className="text-lg text-slate-400 leading-relaxed mb-8">
-                  Saya adalah seorang pengembang multi-platform yang menguasai ekosistem web dan mobile. Fokus saya adalah menggabungkan logika kompleks dengan antarmuka yang bersih untuk menciptakan pengalaman pengguna yang memukau dan performa aplikasi yang handal.
+                  Bagi saya, coding bukan cuma sekedar code/syntax, tapi tentang bagaimana ide bisa berubah menjadi sesuatu yang berguna.
                 </p>
                 <div className="grid grid-cols-2 gap-4">
                   {[
-                    { label: 'Experience', val: '3+ Yrs' },
-                    { label: 'Projects', val: '24+' },
-                    { label: 'Coffee/Day', val: '2 Cups' },
-                    { label: 'Client Satisfaction', val: '100%' },
+                    { label: 'Personal Projects', val: '24+' },
+                    { label: 'Skills', val: 'Frontend & Backend' },
                   ].map((stat, i) => (
                     <motion.div 
                       key={i} 
@@ -602,7 +603,7 @@ export default function App() {
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-16">
               <h3 className="text-4xl font-bold">Tech Stack & Tools</h3>
-              <p className="text-slate-400 mt-4">Teknologi yang saya gunakan untuk membangun solusi digital.</p>
+              <p className="text-slate-400 mt-4">Teknologi yang saya gunakan untuk membangun Web & Aplikasi.</p>
             </div>
             
             <motion.div 
