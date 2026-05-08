@@ -10,11 +10,11 @@ import * as THREE from 'three';
 
 // --- DATA STATIS ---
 const introWords = [
-  "HALO", 
-  "SELAMAT", 
-  "DATANG", 
-  "DI PORTOFOLIOKU", 
-  "ENJOY"
+  "Halo", 
+  "Selamat Datang", 
+  "di", 
+  "My Portofolio", 
+  "Enjoy"
 ];
 
 const roles = ["UI/UX Designer", "Web Developer", "Mobile Developer", "Fullstack Engineer"];
@@ -43,39 +43,39 @@ const techStack = [
 
 const myProjects = [
   {
-    title: "E-Commerce Microservices",
-    desc: "Platform jual beli online dengan arsitektur microservices yang menjamin skalabilitas tinggi dan performa cepat saat traffic tinggi.",
-    tech: ["Laravel", "React", "MySQL", "Tailwind"],
+    title: "Website TK PGRI Harapan Bangsa 1",
+    desc: "Website sistem informasi sekolah dan PPDB online untuk membantu pengelolaan administrasi, data siswa, dan proses pendaftaran secara digital dan terstruktur.",
+    tech: ["Laravel", "PHP", "MySQL", "Bootstrap"],
     img: "/images/project-ecommerce.jpg"
   },
   {
-    title: "AI Finance Tracker",
-    desc: "Aplikasi mobile untuk melacak pengeluaran secara cerdas menggunakan deteksi foto struk otomatis dan analitik prediktif.",
-    tech: ["Python", "React Native", "PHP", "MySQL"],
+    title: "Aplikasi Catatan AI Pembelajaran",
+    desc: "Aplikasi mobile untuk membantu siswa mencatat materi pembelajaran secara otomatis menggunakan teknologi AI dan speech-to-text.",
+    tech: ["Flutter", "Dart", "Firebase", "AI Integration"],
     img: "/images/project-finance.jpg"
   },
   {
-    title: "Company Landing Page",
-    desc: "Website company profile modern dengan animasi interaktif 3D dan load speed di atas 95+ di Google PageSpeed.",
-    tech: ["HTML", "CSS", "JS", "Three.js"],
+    title: "Website Pendataan MBG",
+    desc: "Aplikasi pendataan ompreng MBG untuk mencatat proses pengambilan dan pengembalian secara digital agar lebih cepat dan terorganisir.",
+    tech: ["Flutter", "Dart", "Firebase"],
     img: "/images/project-landing.jpg"
   }
 ];
 
 const certificates = [
   {
-    title: "Google Data Analytics Professional",
-    issuer: "Google via Coursera",
+    title: "Dicoding: Belajar dasar Aws Cloud",
+    issuer: "Dicoding Indonesia",
     img: "/images/cert-google.jpg"
   },
   {
-    title: "Advanced Laravel Applications",
-    issuer: "Laracasts",
+    title: "Dicoding: Pemrograman JavaScript (Dasar)",
+    issuer: "Dicoding Indonesia",
     img: "/images/cert-laravel.jpg"
   },
   {
-    title: "Frontend Developer Specialization",
-    issuer: "Meta",
+    title: "AWS Academy Cloud Foundations",
+    issuer: "Amazon Web Services (AWS)",
     img: "/images/cert-frontend.jpg"
   }
 ];
@@ -84,23 +84,17 @@ const educationData = [
   { 
     year: '2023 – Sekarang', 
     school: 'SMKN 13 Bandung', 
-    degree: 'Jurusan Rekayasa Perangkat Lunak',
-    desc: 'Fokus pada pengembangan aplikasi web dan mobile. Aktif dalam eksplorasi teknologi terbaru dan pengerjaan proyek-proyek praktis yang menunjang skill programming.',
-    badge: 'SISWA AKTIF'
+    degree: 'Jurusan Rekayasa Perangkat Lunak'
   },
   { 
     year: '2020 – 2023', 
     school: 'MTSN 2 Kota Bandung', 
-    degree: 'Sekolah Menengah Pertama',
-    desc: 'Membangun dasar kedisiplinan dan keaktifan organisasi. Mulai mengenal dunia teknologi dan komputer secara otodidak.',
-    badge: 'LULUSAN TERBAIK'
+    degree: 'Sekolah Menengah Pertama'
   },
   { 
     year: '2014 – 2020', 
     school: 'SDN 161 Sukapura', 
-    degree: 'Sekolah Dasar',
-    desc: 'Masa awal pendidikan formal yang membentuk karakter dasar dan ketertarikan pada ilmu pengetahuan umum.',
-    badge: 'LULUSAN'
+    degree: 'Sekolah Dasar'
   }
 ];
 
@@ -320,6 +314,8 @@ export default function App() {
   
   const [darkMode, setDarkMode] = useState(true);
   const [activeSection, setActiveSection] = useState('home');
+  const [formEmail, setFormEmail] = useState('');
+  const [formMessage, setFormMessage] = useState('');
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
 
@@ -360,6 +356,14 @@ export default function App() {
     }
   };
 
+  const handleSendMessage = (e) => {
+    e.preventDefault();
+    if (!formEmail || !formMessage) return;
+    const subject = encodeURIComponent("Pesan dari Portfolio Website");
+    const body = encodeURIComponent(`Email Pengirim: ${formEmail}\n\nPesan:\n${formMessage}`);
+    window.location.href = `mailto:refkyfm2012@gmail.com?subject=${subject}&body=${body}`;
+  };
+
   return (
     <div className={`${darkMode ? 'bg-slate-950 text-white' : 'bg-slate-50 text-slate-900'} transition-colors duration-500 min-h-screen font-sans selection:bg-purple-500/30 overflow-x-hidden`}>
       
@@ -386,10 +390,20 @@ export default function App() {
             <AnimatePresence mode="wait">
               <motion.h1
                 key={introStep}
-                initial={{ opacity: 0, x: -30 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: 30 }}
-                transition={{ duration: 0.3 }}
+                initial={
+                  introStep % 4 === 0 ? { opacity: 0, x: -50 } :
+                  introStep % 4 === 1 ? { opacity: 0, y: 50 } :
+                  introStep % 4 === 2 ? { opacity: 0, x: 50 } :
+                  { opacity: 0, y: -50 }
+                }
+                animate={{ opacity: 1, x: 0, y: 0 }}
+                exit={
+                  introStep % 4 === 0 ? { opacity: 0, x: 50 } :
+                  introStep % 4 === 1 ? { opacity: 0, y: -50 } :
+                  introStep % 4 === 2 ? { opacity: 0, x: -50 } :
+                  { opacity: 0, y: 50 }
+                }
+                transition={{ duration: 0.4, type: "spring", stiffness: 100 }}
                 className="text-4xl md:text-6xl lg:text-7xl font-black tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400 w-full md:max-w-3xl drop-shadow-[0_0_15px_rgba(168,85,247,0.3)] leading-tight"
               >
                 {introWords[introStep]}
@@ -586,7 +600,7 @@ export default function App() {
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
                       transition={{ duration: 0.4, delay: 0.3 + (i * 0.1) }}
-                      className="p-6 rounded-2xl bg-white/5 border border-white/5 hover:border-purple-500/30 transition-colors"
+                      className="p-6 rounded-2xl bg-white/5 border border-white/5 hover:border-purple-500/30 transition-colors flex flex-col justify-center items-center text-center h-full"
                     >
                       <p className="text-xs text-slate-500 uppercase mb-1">{stat.label}</p>
                       <p className="text-2xl font-bold text-white">{stat.val}</p>
@@ -649,7 +663,7 @@ export default function App() {
               className="mb-16"
             >
               <h3 className="text-4xl font-bold">My Projects</h3>
-              <p className="text-slate-400 mt-4">Beberapa karya dan solusi yang telah saya bangun.</p>
+              <p className="text-slate-400 mt-4">Beberapa karya yang telah saya bangun.</p>
             </motion.div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -764,14 +778,7 @@ export default function App() {
                   <div className="bg-slate-900/40 backdrop-blur-sm border border-purple-500/20 rounded-xl p-6 md:p-8 hover:border-purple-500/50 transition-all duration-300 shadow-lg hover:shadow-purple-500/10 group">
                     <span className="text-xs md:text-sm font-mono text-purple-400 mb-2 block tracking-wider">{edu.year}</span>
                     <h4 className="text-xl md:text-2xl font-bold text-white tracking-wide mb-1">{edu.school}</h4>
-                    <p className="text-slate-300 text-sm md:text-base font-medium mb-4">{edu.degree}</p>
-                    <p className="text-slate-400 text-sm md:text-base leading-relaxed mb-6">{edu.desc}</p>
-                    
-                    <div className="inline-block">
-                      <span className="px-3 py-1.5 text-[10px] md:text-xs font-mono uppercase tracking-widest rounded bg-purple-500/10 text-purple-400 border border-purple-500/30 group-hover:bg-purple-500/20 transition-colors">
-                        {edu.badge}
-                      </span>
-                    </div>
+                    <p className="text-slate-300 text-sm md:text-base font-medium">{edu.degree}</p>
                   </div>
                 </motion.div>
               ))}
@@ -834,17 +841,34 @@ export default function App() {
             <h2 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight">Let's build the <span className="text-purple-400 underline decoration-purple-500/30">future</span> together.</h2>
             <p className="text-slate-400 mb-12 max-w-md mx-auto">Tersedia untuk kolaborasi atau sekadar diskusi teknologi. Jangan ragu untuk menyapa!</p>
             
-            <form className="max-w-md mx-auto space-y-4 mb-12" onSubmit={(e) => e.preventDefault()}>
-              <input type="email" placeholder="Your Email" className="w-full px-6 py-4 rounded-2xl bg-white/5 border border-white/10 focus:outline-none focus:border-purple-500 transition-all text-white placeholder-slate-500" />
-              <textarea placeholder="Message" className="w-full px-6 py-4 rounded-2xl bg-white/5 border border-white/10 h-32 focus:outline-none focus:border-purple-500 transition-all text-white placeholder-slate-500" />
-              <button type="button" className="w-full py-4 rounded-2xl bg-purple-600 hover:bg-purple-500 text-white font-bold transition-transform active:scale-95 flex items-center justify-center gap-2 shadow-lg shadow-purple-500/20">
+            <form className="max-w-md mx-auto space-y-4 mb-12" onSubmit={handleSendMessage}>
+              <input 
+                type="email" 
+                placeholder="Your Email" 
+                value={formEmail}
+                onChange={(e) => setFormEmail(e.target.value)}
+                required
+                className="w-full px-6 py-4 rounded-2xl bg-white/5 border border-white/10 focus:outline-none focus:border-purple-500 transition-all text-white placeholder-slate-500" 
+              />
+              <textarea 
+                placeholder="Message" 
+                value={formMessage}
+                onChange={(e) => setFormMessage(e.target.value)}
+                required
+                className="w-full px-6 py-4 rounded-2xl bg-white/5 border border-white/10 h-32 focus:outline-none focus:border-purple-500 transition-all text-white placeholder-slate-500" 
+              />
+              <button type="submit" className="w-full py-4 rounded-2xl bg-purple-600 hover:bg-purple-500 text-white font-bold transition-transform active:scale-95 flex items-center justify-center gap-2 shadow-lg shadow-purple-500/20">
                 Send Message <Send size={18} />
               </button>
             </form>
 
             <div className="flex justify-center gap-8 border-t border-white/5 pt-12">
-              {[Github, Instagram, Linkedin].map((Icon, i) => (
-                <a key={i} href="#" className="text-slate-500 hover:text-white transition-colors hover:scale-110">
+              {[
+                { Icon: Instagram, link: "https://www.instagram.com/refkyyfm?igsh=OHRkeXdyOTl3NTlm" },
+                { Icon: Github, link: "https://github.com/refkyaja" },
+                { Icon: Mail, link: "mailto:refkyfm2012@gmail.com" }
+              ].map(({ Icon, link }, i) => (
+                <a key={i} href={link} target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-white transition-colors hover:scale-110">
                   <Icon size={24} />
                 </a>
               ))}
